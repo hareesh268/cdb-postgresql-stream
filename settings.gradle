@@ -1,0 +1,10 @@
+rootProject.buildFileName = 'cdb-postgresql-stream.gradle'
+rootProject.name = 'cdb-postgresql-stream'
+setBuildFileName(rootProject)
+
+def setBuildFileName(project) {
+    project.children.each { child ->
+        child.buildFileName = "${child.name}.gradle"
+        setBuildFileName(child)
+    }
+}

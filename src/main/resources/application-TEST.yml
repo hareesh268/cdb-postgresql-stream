@@ -1,0 +1,157 @@
+
+
+logging.level.com.optum.exts.cdb.stream.SourceCSBStreams: INFO
+server.port: 8182
+
+
+
+
+
+spring:
+  kafka:
+    #auto.offset.reset: latest
+    #auto.commit.interval.ms: 6000
+    bootstrapServers: kaas-test-ctc-a.optum.com:443
+    #errors.tolerance : all
+    #acks: all
+
+
+
+    streams:
+      applicationId: cdb-postgresql-stream-prof_testing
+      #applicationId: cdb-postgresql-stream-l_cnsm_new
+      #applicationId: cdb-postgresql-stream-hlt
+      #applicationId: cdb-postgresql-stream-devv2
+
+
+
+
+      metricsRecordingLevel: INFO
+
+
+      properties:
+
+        security.protocol: "SSL"
+        #ssl.keystore.location: /Users/rgupta59/Documents/cdb-extract-base/cdb-extract-base.jks
+        #ssl.truststore.location: /Users/rgupta59/Documents/cdb-extract-base/pep-generic-truststore.jks
+        ssl.keystore.location: /tmp/cdb-extract-base.jks
+        ssl.truststore.location: /tmp/pep-generic-truststore.jks
+
+        ssl.truststore.password: password
+        ssl.keystore.password: emF2UyQn1Tl0VxQn2O9XqQ
+        default.timestamp.extractor: org.apache.kafka.streams.processor.WallclockTimestampExtractor
+        default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        auto.offset.reset: earliest
+        request.timeout.ms: 60000
+        retries: 10
+
+
+      custom:
+          "[batch.size]": 1000012
+          "[default.api.timeout.ms]": 900000
+          "[delivery.timeout.ms]": 2147483647
+          "[heartbeat.interval.ms]": 6000
+          "[max.block.ms]": 2147483647
+          "[max.in.flight.requests.per.connection]": 1
+          "[max.request.size]": 1000012
+          "[request.timeout.ms]": 60000
+          "[retries]": 2147483647
+          "[session.timeout.ms]": 120000
+
+    properties:
+      schema.registry.url: "http://kaas-test-schema-registry-a.optum.com" #http://127.0.0.1:8081
+      specific.avro.reader: true
+      num.stream.threads: 3
+
+
+
+
+
+
+streams:
+
+
+
+
+  topicinfo:
+    lcnsmSrch: DE_STREAMS.ctc.cdc.cdb.l_cnsm_srch.v2
+    cnsmSts: DE_STREAMS.ctc.cdc.cdb.cnsm_sts.v2
+    lcovPrdtdt: DE_STREAMS.ctc.cdc.cdb.l_cov_prdt_dt.v2
+    covLvlTyp: DE_STREAMS.ctc.cdc.cdb.cov_lvl_typ.v2
+    mlCnsmAdr: DE_STREAMS.ctc.cdc.cdb.ml_cnsm_adr.v2
+    mlCnsmTel: DE_STREAMS.ctc.cdc.cdb.ml_cnsm_tel.v2
+    mlCnsmElctrAdr: DE_STREAMS.ctc.cdc.cdb.ml_cnsm_elctr_adr.v2
+    lCovPrdtPcp: DE_STREAMS.ctc.cdc.cdb.l_cov_prdt_pcp.v2
+    cnsmDtl: DE_STREAMS.ctc.cdc.cdb.cnsm_dtl.v2
+    lHltSrvDt: DE_STREAMS.ctc.cdc.cdb.l_hlt_srv_dt.v2
+    lLfDisPrdtDt: DE_STREAMS.ctc.cdc.cdb.l_lf_dis_prdt_dt.v2
+    cdbSecurity: DE_STREAMS.ctc.cdc.cdb.cdb_security.v2
+    cnsmMdcrEnrl: DE_STREAMS.ctc.cdc.cdb.cnsm_mdcr_enrl.v2
+    cnsmMdcrPrisec: DE_STREAMS.ctc.cdc.cdb.cnsm_mdcr_prisec.v2
+    mlCnsmXref: DE_STREAMS.ctc.cdc.cdb.ml_cnsm_xref.v2
+    cnsmOthrIns: DE_STREAMS.ctc.cdc.cdb.cnsm_othr_ins.v2
+    cnsmMdcrEntl: DE_STREAMS.ctc.cdc.cdb.cnsm_mdcr_entl.v2
+    cnsmCobPrimacy: DE_STREAMS.ctc.cdc.cdb.cnsm_cob_primacy.v2
+    cnsmAuthRep: DE_STREAMS.ctc.cdc.cdb.cnsm_auth_rep.v2
+    cnsmCal: DE_STREAMS.ctc.cdc.cdb.cnsm_cal.v2
+    cnsmCobPrisec: DE_STREAMS.ctc.cdc.cdb.cnsm_cob_prisec.v2
+    cnsmCovCustDefnFld: DE_STREAMS.ctc.cdc.cdb.cnsm_cov_cust_defn_fld.v2
+    cnsmCustDefnFld: DE_STREAMS.ctc.cdc.cdb.cnsm_cust_defn_fld.v2
+    cnsmEft: DE_STREAMS.ctc.cdc.cdb.cnsm_eft.v2
+    cnsmMdcrElig: DE_STREAMS.ctc.cdc.cdb.cnsm_mdcr_elig.v2
+    cnsmMdcrPrimacy: DE_STREAMS.ctc.cdc.cdb.cnsm_mdcr_primacy.v2
+    cnsmPrxstCond: DE_STREAMS.ctc.cdc.cdb.cnsm_prxst_cond.v2
+    cnsmSlryBasDedOop: DE_STREAMS.ctc.cdc.cdb.cnsm_slry_bas_ded_oop.v2
+    covInfo: DE_STREAMS.ctc.cdc.cdb.cov_info.v2
+    custInfo: DE_STREAMS.ctc.cdc.cdb.cust_info.v2
+    plnBenSet: DE_STREAMS.ctc.cdc.cdb.pln_ben_set.v2
+    plnBenSetDet: DE_STREAMS.ctc.cdc.cdb.pln_ben_set_det.v2
+    polInfo: DE_STREAMS.ctc.cdc.cdb.pol_info.v2
+    rxBenSetDet: DE_STREAMS.ctc.cdc.cdb.rx_ben_set_det.v2
+    prdtTrig: cdb_memcnt.ctc.test.l_cov_prdt_dt_trig.v1
+    disTrig: cdb_memcnt.ctc.test.l_lf_dis_prdt_dt_trig.v1
+    hltSrvTrig: cdb_memcnt.ctc.test.l_hlt_srv_dt_trig.v1
+    lCnsmSrchTrig: cdb_memcnt.ctc.test.l_cnsm_srch_trig.v1
+
+
+
+
+
+
+
+
+input:
+
+  postgresUrl: jdbc:postgresql://dbvrd28250:5432/postgres
+  postgresUser: postgres
+  postgresPwd: postgres
+  schema: systest
+  physicalDelValue: X
+  srcSysId: CDBSTRM
+
+
+---
+#spring.datasource.driver-class-name: org.postgresql.Driver
+#spring.datasource.url: jdbc:postgresql://dbvrd28250:6543/postgres?prepareThreshold=0
+spring.datasource.dataSourceClassName: org.postgresql.ds.PGSimpleDataSourcer
+spring.datasource.url: jdbc:postgresql://dbvrd28250:5432/postgres?ApplicationName=TransactionLoadDEV
+spring.datasource.username: postgres
+spring.datasource.password: postgres
+spring.datasource.type: com.zaxxer.hikari.HikariDataSource
+spring.datasource.hikari.minimumIdle: 0
+spring.datasource.hikari.maximumPoolSize: 5
+spring.datasource.hikari.idleTimeout: 30000
+spring.datasource.hikari.poolName: CSPHikariCP
+spring.datasource.hikari.maxLifetime: 200000
+spring.datasource.hikari.connectionTimeout: 1500000
+spring.datasource.hikari.leakDetectionThreshold: 2100000
+
+
+
+logging.splunk.url: https://npe-dmz-hec-splunk.optum.com
+logging.splunk.token: b93459f8-f941-4307-80e2-6afad0c0544b
+logging.splunk.index: cba_CDB_BDPaaS
+logging.splunk.host: http://k8s-prod-ctc-aci.optum.com:31142
+
+

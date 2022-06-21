@@ -1,0 +1,9 @@
+apiVersion: v1
+metadata:
+  askId: UHGWM110-016199
+  caAgileId: 209067596300d
+  projectKey: com.optum.exts.cdb.stream:cdb-postgressql-stream
+  projectFriendlyName: cdb-postgressql-stream
+  componentType: code
+  targetQG: GATE_03
+ 

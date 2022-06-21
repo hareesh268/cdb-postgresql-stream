@@ -1,0 +1,144 @@
+spring.profiles.active: PROD
+logging.level.com.optum.exts.cdb.stream.SourceCSBStreams: INFO
+spring:
+  kafka:
+    bootstrapServers: "apslp1007.uhc.com:9093,apslp1008.uhc.com:9093,apslp1009.uhc.com:9093,apslp1010.uhc.com:9093,apslp1011.uhc.com:9093,apslp1012.uhc.com:9093,apslp1133.uhc.com:9093"
+    streams:
+      applicationId: cdb-extract-elr
+      metricsRecordingLevel: INFO
+
+
+      properties:
+
+        security.protocol: "SSL"
+
+        ssl.truststore.password: 8xj4VxH/Rk+3PW8Q1TajnQ
+        #ssl.keystore.password: P@ssw0rd1234
+        #ssl.key.password: P@ssw0rd1234
+        ssl.keystore.password: k2j3n4h1s9b5#
+        ssl.key.password: k2j3n4h1s9b5#
+
+        #ssl.truststore.password: ${TRUSTSTORE_PWD}
+        #ssl.keystore.password: ${KEYSTORE_PWD}
+        #ssl.key.password: ${KEY_PWD}
+        ssl.keystore.location: /tmp/cdb-extract-prod.jks
+        ssl.truststore.location: /tmp/kaas-truststore.jks
+        default.timestamp.extractor: org.apache.kafka.streams.processor.WallclockTimestampExtractor
+        default.key.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        default.value.serde: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerde
+        auto.offset.reset: latest
+        request.timeout.ms: 60000
+        retries: 10
+        #"[batch.size]": 1000012
+        "[batch.size]": 500006
+        "[default.api.timeout.ms]": 900000
+        "[delivery.timeout.ms]": 2147483647
+        "[heartbeat.interval.ms]": 119999
+        "[max.block.ms]": 2147483647
+        "[max.in.flight.requests.per.connection]": 1
+        "[max.request.size]": 1000012
+        "[request.timeout.ms]": 60000
+        "[retries]": 2147483647
+        "[session.timeout.ms]": 120000
+
+
+
+
+    properties:
+
+      schema.registry.url: "http://kaas-prod-schema-registry-a.optum.com" #http://127.0.0.1:8081
+      specific.avro.reader: true
+      num.stream.threads: ${THREADS}
+
+
+
+
+
+streams:
+
+
+
+
+  topicinfo:
+    lcnsmSrch: DE_STREAMS.elr.cdc.cdb.l_cnsm_srch.v2
+    cnsmSts: DE_STREAMS.elr.cdc.cdb.cnsm_sts.v2
+    lcovPrdtdt: DE_STREAMS.elr.cdc.cdb.l_cov_prdt_dt.v2
+    covLvlTyp: DE_STREAMS.elr.cdc.cdb.cov_lvl_typ.v2
+    mlCnsmAdr: DE_STREAMS.elr.cdc.cdb.ml_cnsm_adr.v2
+    mlCnsmTel: DE_STREAMS.elr.cdc.cdb.ml_cnsm_tel.v2
+    mlCnsmElctrAdr: DE_STREAMS.elr.cdc.cdb.ml_cnsm_elctr_adr.v2
+    lCovPrdtPcp: DE_STREAMS.elr.cdc.cdb.l_cov_prdt_pcp.v2
+    cnsmDtl: DE_STREAMS.elr.cdc.cdb.cnsm_dtl.v2
+    lHltSrvDt: DE_STREAMS.elr.cdc.cdb.l_hlt_srv_dt.v2
+    lLfDisPrdtDt: DE_STREAMS.elr.cdc.cdb.l_lf_dis_prdt_dt.v2
+    cdbSecurity: DE_STREAMS.elr.cdc.cdb.cdb_security.v2
+    cnsmMdcrEnrl: DE_STREAMS.elr.cdc.cdb.cnsm_mdcr_enrl.v2
+    cnsmMdcrPrisec: DE_STREAMS.elr.cdc.cdb.cnsm_mdcr_prisec.v2
+    mlCnsmXref: DE_STREAMS.elr.cdc.cdb.ml_cnsm_xref.v2
+    cnsmOthrIns: DE_STREAMS.elr.cdc.cdb.cnsm_othr_ins.v2
+    cnsmMdcrEntl: DE_STREAMS.elr.cdc.cdb.cnsm_mdcr_entl.v2
+    cnsmCobPrimacy: DE_STREAMS.elr.cdc.cdb.cnsm_cob_primacy.v2
+    cnsmAuthRep: DE_STREAMS.elr.cdc.cdb.cnsm_auth_rep.v2
+    cnsmCal: DE_STREAMS.elr.cdc.cdb.cnsm_cal.v2
+    cnsmCobPrisec: DE_STREAMS.elr.cdc.cdb.cnsm_cob_prisec.v2
+    cnsmCovCustDefnFld: DE_STREAMS.elr.cdc.cdb.cnsm_cov_cust_defn_fld.v2
+    cnsmCustDefnFld: DE_STREAMS.elr.cdc.cdb.cnsm_cust_defn_fld.v2
+    cnsmEft: DE_STREAMS.elr.cdc.cdb.cnsm_eft.v2
+    cnsmMdcrElig: DE_STREAMS.elr.cdc.cdb.cnsm_mdcr_elig.v2
+    cnsmMdcrPrimacy: DE_STREAMS.elr.cdc.cdb.cnsm_mdcr_primacy.v2
+    cnsmPrxstCond: DE_STREAMS.elr.cdc.cdb.cnsm_prxst_cond.v2
+    cnsmSlryBasDedOop: DE_STREAMS.elr.cdc.cdb.cnsm_slry_bas_ded_oop.v2
+    covInfo: DE_STREAMS.elr.cdc.cdb.cov_info.v2
+    custInfo: DE_STREAMS.elr.cdc.cdb.cust_info.v2
+    plnBenSet: DE_STREAMS.elr.cdc.cdb.pln_ben_set.v2
+    plnBenSetDet: DE_STREAMS.elr.cdc.cdb.pln_ben_set_det.v2
+    polInfo: DE_STREAMS.elr.cdc.cdb.pol_info.v2
+    rxBenSetDet: DE_STREAMS.elr.cdc.cdb.rx_ben_set_det.v2
+
+    prdtTrig: cdb_memcnt.elr.prod.l_cov_prdt_dt_trig.v1
+    disTrig: cdb_memcnt.elr.prod.l_lf_dis_prdt_dt_trig.v1
+    hltSrvTrig: cdb_memcnt.elr.prod.l_hlt_srv_dt_trig.v1
+
+
+
+
+
+
+
+
+input:
+
+  schema: f6435dbpedp
+  physicalDelValue: X
+  srcSysId: CDBSTRM
+
+---
+
+
+spring.datasource.driver-class-name: org.postgresql.Driver
+spring.datasource.url: ${CON_URL}?ApplicationName=TransactionLoad${GROUP}
+#spring.datasource.url: jdbc:postgresql://dbslp2276:6543,dbslp2280:6543/postgres?target_session_attrs=read-write?ApplicationName=TransactionLoad${GROUP}
+#spring.datasource.url: jdbc:postgresql://dbvrd28250:6543/postgres?prepareThreshold=0
+spring.datasource.username: ${SECRETS_EDP_USER}
+spring.datasource.password: ${SECRETS_EDP_USER_PASSWD}
+spring.datasource.type: com.zaxxer.hikari.HikariDataSource
+spring.datasource.hikari.minimumIdle: ${MIN_CON_POOL}
+spring.datasource.hikari.maximumPoolSize: ${MAX_CON_POOL}
+spring.datasource.hikari.idleTimeout: 3000
+spring.datasource.hikari.poolName: CSPHikariCP
+spring.datasource.hikari.maxLifetime: 2000000
+spring.datasource.hikari.connectionTimeout: 1500000
+spring.datasource.hikari.leakDetectionThreshold: 2100000
+#logging.level.com.zaxxer.hikari.HikariConfig: DEBUG
+#logging.level.com.zaxxer.hikari: TRACE
+
+
+
+logging.splunk.url: https://phi-dmz-hec-splunk.optum.com
+logging.splunk.token: ${SECRETS_SPLUNK_TOKEN}
+logging.splunk.index: cba_CDB_BDPaaS
+logging.splunk.host: http://k8s-prod-ctc-aci.optum.com:31142
+
+
+#spring.profiles: local
+logging.level: INFO

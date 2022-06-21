@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdbedpstreamgroup8
+  namespace: cdbedpprodctc
+spec:
+  selector:
+    matchLabels:
+      run: cdbedpstreamgroup8
+  replicas: 50
+  template:
+    metadata:
+      labels:
+        run: cdbedpstreamgroup8
+    spec:
+     containers:
+     - name: mycontainer
+       image: docker.repo1.uhc.com/bds_oso_id/edp/compact/cdbedpstreamprodgroupscluster
+       ports:
+       - containerPort: 8080
+       imagePullPolicy: Always
+       resources:
+        requests:
+          memory: "300Mi"
+          cpu: "100m"
+        limits:
+          memory: "2000Mi"
+          cpu: "1000m"
+       env:
+        - name: APP_NAME
+          value: "elr-group8"
+        - name: ENV_PROFILE
+          value: "ELRPROD"
+        - name: THREADS
+          value: "7"
+        - name: MAX_CON_POOL
+          value: "5"
+        - name: MIN_CON_POOL
+          value: "0"
+        - name: CON_URL
+          valueFrom:
+           configMapKeyRef:
+              name: common-property
+              key: prop.ctcpgconurl
+        - name: JAVA_OPTS
+          value: -Xms1G -Xmx1G
+        - name: GROUP
+          valueFrom:
+           configMapKeyRef:
+              name: cdbedpstream-prod-group
+              key: consumer.group8
+        - name: SECRETS_EDP_USER
+          valueFrom:
+           secretKeyRef:
+              name: edp-prod-security
+              key: spring.user.name
+        - name: SECRETS_EDP_USER_PASSWD
+          valueFrom:
+           secretKeyRef:
+              name: edp-prod-security
+              key: spring.user.password
+        - name: SECRETS_SPLUNK_TOKEN
+          valueFrom:
+           secretKeyRef:
+              name: edp-prod-security
+              key: spring.splunk.token
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cdbedpstreamgroup8-svc3
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 32558
+  selector:
+    run: cdbedpstreamgroup8
+

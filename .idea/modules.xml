@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream.iml" filepath="$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream_main.iml" filepath="$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream_main.iml" group="cdb-postgresql-stream" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream_test.iml" filepath="$PROJECT_DIR$/.idea/modules/cdb-postgresql-stream_test.iml" group="cdb-postgresql-stream" />
+    </modules>
+  </component>
+</project>

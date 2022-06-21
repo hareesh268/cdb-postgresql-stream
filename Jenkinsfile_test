@@ -1,0 +1,21 @@
+@Library("com.optum.jenkins.pipeline.library@master") _
+node {
+label '****'
+//script {
+//git (url: 'https://github.optum.com/EligibilityBigData/cdb-postgresql-stream.git', branch: 'master', credentialsId: 'ss94')
+//}
+	
+stage('List pods') {
+	sh 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl'
+  	sh 'chmod +x ./kubectl'
+	sh 'mv ./kubectl /usr/local/bin/kubectl'
+	//sh ' mv kubectl /usr/local/sbin'
+	git url:'https://github.optum.com/EligibilityBigData/cdb-postgresql-stream.git'
+			
+	withKubeConfig(
+credentialsId: 'token-ss94:eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJjZGJiZHMiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlY3JldC5uYW1lIjoicmd1cHRhNTktdG9rZW4tZDZmOTgiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoicmd1cHRhNTkiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiIzNGY2NzYzMy04YzgxLTExZTktYjFjNC1hODFlODQ3M2Q5MmEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6Y2RiYmRzOnJndXB0YTU5In0.JKBWvDlOXWraVhLASfCBz2-nXcTmMqsq9XsmombZwMVPtgDoRFlcbdD-3Xa8x4R_sdiYb8PMJGBxRJ6wchUna-SSN8tGfi829gq8BUHuAXEbe1EZa-K9-HHSdxCF3lIsucu8gR12B4id8KU6fJ8vQ9lNpd5zB9maebQmxO-yswncz4oBUd1tfR9vZtYCPP7RhVQLoHZc8RLB-PV7ijhJQWwuwH1yiW6SA0xtHWg78Brz9gwJ8tL42cu4ES-amL-oXV4wiwokTc1Et26CVVOzhmO4xezyCm1Px_4r7dxZqYJhJJ2seQzHmwr07rJCAGuNkDOL-PPkO-9UvKTgOkXqKA', 
+serverUrl: 'https://k8s-dash-prod-ctc.optum.com') {
+sh 'kubectl get pods' 
+}
+}
+}

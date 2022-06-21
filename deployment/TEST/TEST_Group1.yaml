@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdbedpstreamtestgroup1
+  namespace: cdbbds
+spec:
+  selector:
+    matchLabels:
+      run: cdbedpstreamtestgroup1
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        run: cdbedpstreamtestgroup1
+    spec:
+     containers:
+     - name: mycontainer
+       image: docker.repo1.uhc.com/bds_oso_id/edp/compact/cdbedpstreamtestgroups
+       ports:
+       - containerPort: 8080
+       imagePullPolicy: Always
+       resources:
+        requests:
+          memory: "200Mi"
+          cpu: "50m"
+        limits:
+          memory: "1Gi"
+          cpu: "300m"
+       env:
+        - name: APP_NAME
+          value: "test-group1"
+        - name: ENV_PROFILE
+          value: "TEST"
+        - name: GROUP
+          valueFrom:
+           configMapKeyRef:
+              name: cdbedpstream-test-group
+              key: consumer.group1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cdbedpstreamtestgroup1-svc3
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 32651
+  selector:
+    run: cdbedpstreamtestgroup1
